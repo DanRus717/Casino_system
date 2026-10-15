@@ -1,0 +1,52 @@
+@startuml Casino Use Case
+left to right direction
+
+actor "Администратор" as Admin
+actor "Пользователь" as User
+
+rectangle "Casino" {
+    usecase "Вход в систему" as UC_LoginAdmin
+
+    usecase "Регистрация" as UC_Register
+
+    usecase "Вход в систему" as UC_LoginUser
+
+    usecase "Просмотр списка клиентов" as Watch_Clients
+    usecase "Удаление клиента" as Delete_Client
+    usecase "Занесение гостя в черный список" as Blacklist
+
+    usecase "Ввод имени пользователя" as Enter_username
+    usecase "Ввод пароля" as Enter_password
+
+    usecase "Проверка по ЧС" as Blacklist_check
+    usecase "Пропуск" as Enter
+    usecase "Отказ в проходе" as Enter_reject
+
+}
+usecase "Игра" as Game
+usecase "Сделать ставку" as Bet
+usecase "Пополнить" as Add_money
+usecase "Вывести" as Return_money
+
+Admin -- UC_LoginAdmin
+
+UC_LoginAdmin -- Delete_Client
+UC_LoginAdmin -- Blacklist
+UC_LoginAdmin -- Watch_Clients
+
+User -- UC_Register
+User -- UC_LoginUser
+User -- Game
+User -- Add_money
+User -- Return_money
+
+
+UC_Register ..> Enter_username : <<include>>
+UC_Register ..> Enter_password : <<include>>
+
+UC_LoginUser ..> Blacklist_check : <<include>>
+Blacklist_check <.. Enter : <<exclude>>
+Blacklist_check <.. Enter_reject : <<exclude>>
+
+Game ..> Bet : <include>
+@enduml
