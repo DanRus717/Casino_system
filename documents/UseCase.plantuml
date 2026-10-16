@@ -18,9 +18,10 @@ rectangle "Casino" {
     usecase "Ввод имени пользователя" as Enter_username
     usecase "Ввод пароля" as Enter_password
 
-    usecase "Проверка по ЧС" as Blacklist_check
-    usecase "Пропуск" as Enter
-    usecase "Отказ в проходе" as Enter_reject
+    usecase "Игра" as Game
+    usecase "Сделать ставку" as Bet
+    usecase "Пополнить" as Add_money
+    usecase "Вывести" as Return_money
 
 }
 usecase "Игра" as Game
@@ -36,17 +37,13 @@ UC_LoginAdmin -- Watch_Clients
 
 User -- UC_Register
 User -- UC_LoginUser
-User -- Game
-User -- Add_money
-User -- Return_money
+UC_LoginUser -- Game
+UC_LoginUser -- Add_money
+UC_LoginUser -- Return_money
 
 
 UC_Register ..> Enter_username : <<include>>
 UC_Register ..> Enter_password : <<include>>
-
-UC_LoginUser ..> Blacklist_check : <<include>>
-Blacklist_check <.. Enter : <<exclude>>
-Blacklist_check <.. Enter_reject : <<exclude>>
 
 Game ..> Bet : <include>
 @enduml
