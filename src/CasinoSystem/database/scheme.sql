@@ -18,13 +18,13 @@ CREATE TABLE users(
     user_id INTEGER PRIMARY KEY AUTOINCREMENT,
     FOREIGN KEY (user_role) REFERENCES (user_role_id),
     FOREIGN KEY (bank_id) REFERENCES (account_id),
-    first_name TEXT NOT NULL,
-    second_name TEXT NOT NULL,
+    name TEXT NOT NULL,
+    surname TEXT NOT NULL,
     patronymic TEXT,
     login TEXT NOT NULL UNIQUE,
-    password# TEXT NOT NULL,
-    reg_date DATE NOT NULL,
-    last_autorise DATE NOT NULL
+    password_hash TEXT NOT NULL,
+    date_of_reg DATE NOT NULL,
+    date_last_enter DATE NOT NULL
 );
 
 CREATE TABLE operations(

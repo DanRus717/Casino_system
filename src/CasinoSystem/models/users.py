@@ -6,8 +6,8 @@ class Users:
     user_id: int
     user_role: int
     bank_id: int
-    first_name: str
-    second_name: str
+    name: str
+    surname: str
     patronymic: str
     login: str
     password_hash: str

@@ -5,4 +5,4 @@ from dataclasses import dataclass
 class Bank_accounts:
     account_id: int
     money: int
-    casino_profit: int
+    profit: int
