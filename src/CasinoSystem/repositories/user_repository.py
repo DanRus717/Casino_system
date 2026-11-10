@@ -13,7 +13,7 @@ def create(user_role, bank_id, name, surname, patronymic, login, password_hash):
     cur.execute("""
                 INSERT INTO users(user_role, bank_id, name, surname, patronymic, login, password_hash, date_of_reg, date_last_enter)
                 VALUES (?, ?, ?, ?, ?, ?, ?, date('now'), date('now'))
-                """, (user_role, bank_id, name, surname, patronymic, login, password_hash, date_of_reg, date_last_enter))
+                """, (user_role, bank_id, name, surname, patronymic, login, password_hash))
 
     conn.commit()
     conn.close()
