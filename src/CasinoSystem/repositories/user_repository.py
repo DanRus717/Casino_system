@@ -6,14 +6,22 @@ def _map(row) -> Users:
     return Users(*row)
 
 
-def create(user_role, bank_id, name, surname, patronymic, login, password_hash):
+def create(user_role, name, surname, patronymic, login, password_hash):
     conn = get_connection()
     cur = conn.cursor()
 
     cur.execute("""
-                INSERT INTO users(user_role, bank_id, name, surname, patronymic, login, password_hash, date_of_reg, date_last_enter)
+                INSERT INTO users(user_role, name, surname, patronymic, login, password_hash, date_of_reg, date_last_enter)
                 VALUES (?, ?, ?, ?, ?, ?, ?, date('now'), date('now'))
-                """, (user_role, bank_id, name, surname, patronymic, login, password_hash))
+                """, (user_role,  name, surname, patronymic, login, password_hash))
+
+    user_id = cur.lastrowid
+    bank_id = user_id
+
+    cur.execute("""
+                UPDATE users SET bank_id = ?
+                WHERE user_id = ?
+                """, (bank_id, user_id))
 
     conn.commit()
     conn.close()
